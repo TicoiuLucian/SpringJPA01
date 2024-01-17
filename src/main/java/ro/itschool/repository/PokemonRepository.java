@@ -5,9 +5,8 @@ import org.springframework.data.jpa.repository.Query;
 import ro.itschool.entity.Pokemon;
 
 import java.util.List;
-import java.util.UUID;
 
-public interface PokemonRepository extends JpaRepository<Pokemon, UUID> {
+public interface PokemonRepository extends JpaRepository<Pokemon, Long> {
 
   List<Pokemon> findByNameContaining(String name);
 

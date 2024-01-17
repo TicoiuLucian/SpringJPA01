@@ -4,16 +4,14 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.UUID;
-
 @Data
 @Entity
 @NoArgsConstructor
 public class Pokemon {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.UUID)
-  private UUID id; //Universally Unique IDentifier = 36-character alphanumeric string that can be used to identify
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id; //Universally Unique IDentifier = 36-character alphanumeric string that can be used to identify
   // information
 
   private String name;

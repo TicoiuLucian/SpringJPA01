@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import ro.itschool.entity.Pokemon;
 import ro.itschool.entity.Trainer;
+import ro.itschool.repository.PokemonRepository;
 import ro.itschool.repository.TrainerRepository;
 
 import java.time.LocalDate;
@@ -25,16 +26,23 @@ public class Main {
   }
 
   @Bean
-  public CommandLineRunner runMe(TrainerRepository trainerRepository) {
+  public CommandLineRunner runMe(TrainerRepository trainerRepository, PokemonRepository pokemonRepository) {
     return (args) -> {
 //      saveTrainersAndPokemons(trainerRepository);
-      System.out.println(trainerRepository.findByFirstName("Gertrud"));
+      var trainer = trainerRepository.findById(1L);
+      trainer.ifPresent(t -> {
+        Pokemon p = t.getPokemons().getFirst();
+        pokemonRepository.delete(p);
+//        t.getPokemons().remove(p);
+      });
+      trainer.ifPresent(trainerRepository::save);
     };
+
   }
 
   private void saveTrainersAndPokemons(TrainerRepository trainerRepository) {
 
-    IntStream.rangeClosed(0, 5).forEach(position -> {
+    IntStream.rangeClosed(0, 1).forEach(position -> {
       Trainer trainer = getTrainer();
       trainerRepository.save(trainer);
     });

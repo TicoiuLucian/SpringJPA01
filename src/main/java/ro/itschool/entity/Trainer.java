@@ -15,8 +15,8 @@ import java.util.UUID;
 public class Trainer {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.UUID)
-  private UUID id; //Universally Unique IDentifier = 36-character alphanumeric string that can be used to identify
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id; //Universally Unique IDentifier = 36-character alphanumeric string that can be used to identify
   // information
 
   private String firstName;
