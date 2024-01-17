@@ -30,11 +30,7 @@ public class Main {
     return (args) -> {
 //      saveTrainersAndPokemons(trainerRepository);
       var trainer = trainerRepository.findById(1L);
-      trainer.ifPresent(t -> {
-        Pokemon p = t.getPokemons().getFirst();
-        pokemonRepository.delete(p);
-//        t.getPokemons().remove(p);
-      });
+      trainer.ifPresent(t -> t.getPokemons().remove(t.getPokemons().getFirst()));
       trainer.ifPresent(trainerRepository::save);
     };
 
